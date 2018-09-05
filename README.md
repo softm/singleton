@@ -2,24 +2,24 @@
 # Singletone
 
 ## Singletone Design Pattern?
-    - Singleton 패턴은 Creational 디자인 패턴의 일부.
-    - Java에서 new키워드는 필요할 때마다 클래스의 인스턴스를 작성합니다.
+  - Singleton 패턴은 Creational 디자인 패턴의 일부.
+  - Java에서 new키워드는 필요할 때마다 클래스의 인스턴스를 작성합니다.
       그러나 개발자가 다음과 같은 클래스의 독립 인스턴스를 가져야하는 경우도 있습니다.
-        - 단일 데이터베이스 연결 개체
-        - 단일 공유 리소스
+      - 단일 데이터베이스 연결 개체
+      - 단일 공유 리소스
     ![텍스트](http://examples.javacodegeeks.com/wp-content/uploads/2018/07/jcg-singleton_design_pattern_architecture_diag._1.jpeg)
 
 ## 전제 조건
-    - 정적 멤버 : static클래스 레벨 변수 와 마찬가지로 JVM 메모리에 단일 인스턴스를 생성 합니다.
-    - Private Constructor : 외부 세계로부터 Singleton 클래스의 인스턴스 생성을 제한합니다 (즉, new키워드를 사용하여이 클래스의 초기화 가 방지됩니다)
-     - 정적 팩토리 메소드 : 이것은 Singleton 객체에 대한 전역 액세스 지점을 제공하고 인스턴스를 호출자에게 반환합니다.
+  - 정적 멤버 : static클래스 레벨 변수 와 마찬가지로 JVM 메모리에 단일 인스턴스를 생성 합니다.
+  - Private Constructor : 외부 세계로부터 Singleton 클래스의 인스턴스 생성을 제한합니다 (즉, new키워드를 사용하여이 클래스의 초기화 가 방지됩니다)
+  - 정적 팩토리 메소드 : 이것은 Singleton 객체에 대한 전역 액세스 지점을 제공하고 인스턴스를 호출자에게 반환합니다.
 
 ## 구조
-    - 단일 인스턴스의 소유권은 변경할 수 없습니다.
-    - 게으른 초기화가 권장됩니다.
-    - 싱글 톤 인스턴스에 대한 전역 액세스는 별도로 제공되지 않습니다.
+  - 단일 인스턴스의 소유권은 변경할 수 없습니다.
+  - 게으른 초기화가 권장됩니다.
+  - 싱글 톤 인스턴스에 대한 전역 액세스는 별도로 제공되지 않습니다.
 
-# SingletonClassDemo.java
+## SingletonClassDemo.java
 ```java
 package com.java.design.pattern.singleton;
 
@@ -68,7 +68,7 @@ public class SingletonClassDemo2 {
 }
 ```
 
-    - Static Initialization
+  - Static Initialization
 ```java
 // Static block initialization for exception handling.
 static {
@@ -81,7 +81,7 @@ static {
 ```
 
 ## Bill Pugh Singleton
-    - SingletonBillPughDemo.java
+  - SingletonBillPughDemo.java
 ```java
 package com.java.design.pattern.singleton;
 
@@ -106,21 +106,19 @@ public class SingletonBillPughDemo {
 ```
 
 ## Using Enum
-
 package com.java.design.pattern.singleton;
 ```java
 public enum SingletonEnum {
 	INSTANCE;
 }
-
-// The singleton instance can be accessed via "SingletonEnum.INSTANCE".
 ```
-    - 이 방법은 쉽지만 두 가지 단점이 있습니다. 즉
+// The singleton instance can be accessed via "SingletonEnum.INSTANCE".
+   - 이 방법은 쉽지만 두 가지 단점이 있습니다. 즉
         열거 형은 지연 초기화를 지원하지 않습니다.
         열거 형에서 Singleton 클래스를 Multi-ton으로 변경하는 것은 불가능합니다.
 
 ## Thread-Safe Singleton
-    - SingletonClassDemo3.java
+  - SingletonClassDemo3.java
 ```java
 package com.java.design.pattern.singleton;
 
@@ -248,7 +246,7 @@ protected Object clone() throws CloneNotSupportedException {
 	throw new CloneNotSupportedException();
 }
 ```  
-## Thumb Rules
+# 엄지 손가락 규칙
   - 응용 프로그램에서 스레드 안전성을 보장하기 위해 싱글 톤 디자인 패턴에서 이중 잠금 원칙을 구현합니다.
   - 당신의 싱글 톤을 깨뜨릴 수 있으므로 오브젝트 복제를 조심하십시오. 개체의 clone()메서드를 제한하는 것을 기억하십시오.
   - 자바 리플렉션 API에주의하십시오. 다시 싱글 톤을 깨뜨릴 수 있습니다. (instance != null)검사가 true이면 생성자에 런타임 예외를 던집니다.
